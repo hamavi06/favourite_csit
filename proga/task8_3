@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <clocale>
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Russian"); 
+
+    int N, m;                         // количество вершин и рёбер
+    vector<vector<int>> Gr;           // список смежности
+    int u, v;                         // для чтения рёбер
+
+    // читаем граф из файла
+    ifstream fin("Task8_1.txt");
+    if (!fin) {
+        cout << "не удалось открыть файл Task8_1.txt\n";
+        return 1;
+    }
+    fin >> N >> m;                    // первая строка: N и m
+    Gr.resize(N);                     // выделяем память под N списков
+
+    // заполняем список смежности
+    for (int i = 0; i < m; i++) {
+        fin >> u >> v;
+        // неориентированный граф – добавляем ребро в обе стороны
+        Gr[u].push_back(v);
+        Gr[v].push_back(u);
+    }
+    fin.close();
+
+    // выводим список смежности для наглядности
+    cout << "\nсписок смежности графа:\n";
+    for (int i = 0; i < N; i++) {
+        cout << i << ": ";
+        for (int neighbor : Gr[i]) {
+            cout << neighbor << " ";
+        }
+        cout << endl;
+    }
+
+    // подсчёт степени каждой вершины
+    // степень вершины = размер её списка смежности (Gr[i].size())
+    cout << "\nстепени вершин:\n";
+    for (int i = 0; i < N; i++) {
+        cout << "вершина " << i << ": " << Gr[i].size() << endl;
+    }
+
+    return 0;
+}
