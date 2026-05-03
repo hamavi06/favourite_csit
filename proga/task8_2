@@ -1,0 +1,82 @@
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <clocale>
+#include <algorithm>  
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+
+    int N, m;
+    vector<vector<int>> Gr;  // список смежности
+    int u, v;                // для чтения рёбер
+
+    // читаем граф из файла
+    ifstream fin("Task8_2.txt");
+    if (!fin) {
+        cout << "не удалось открыть файл Task8_1.txt\n";
+        return 1;
+    }
+    fin >> N >> m;
+    Gr.resize(N);
+
+    for (int i = 0; i < m; i++) {
+        // граф неориентированный → добавляем ребро в обе стороны
+        fin >> u >> v;
+        Gr[u].push_back(v);
+        Gr[v].push_back(u);
+    }
+    fin.close();
+
+    // выводим исходный список смежности
+    cout << "\nисходный список смежности графа:\n";
+    for (int i = 0; i < N; i++) {
+        cout << i << ": ";
+        for (int neighbor : Gr[i]) {  // перебираем всех соседей вершины i
+            cout << neighbor << " ";
+        }
+        cout << endl;
+    }
+
+    // запрашиваем вершины A и B
+    int A, B;
+    cout << "\nвведите вершины A и B (через пробел, от 0 до " << N - 1 << "): ";
+    cin >> A >> B;
+
+    // проверка корректности ввода
+    if (A < 0 || A >= N || B < 0 || B >= N) {
+        cout << "\nневерные номера вершин!\n";
+        return 0;
+    }
+
+    // удаляем ребро A-B (если оно есть)
+    // сначала удаляем B из списка смежности A
+    auto it = remove(Gr[A].begin(), Gr[A].end(), B);
+    if (it != Gr[A].end()) {
+        Gr[A].erase(it, Gr[A].end());
+    }
+    else {
+        cout << "\nребра между " << A << " и " << B << " не существует.\n";
+        return 1;
+    }
+
+    // удаляем A из списка смежности B  // делаем то же самое для списка вершины B
+    it = remove(Gr[B].begin(), Gr[B].end(), A);
+    if (it != Gr[B].end()) {
+        Gr[B].erase(it, Gr[B].end());
+    }
+
+    // выводим обновлённый список смежности
+    cout << "\nсписок смежности после удаления ребра (" << A << ", " << B << "):\n";
+    for (int i = 0; i < N; i++) {
+        cout << i << ": ";
+        for (int neighbor : Gr[i]) {
+            cout << neighbor << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
