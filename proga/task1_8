@@ -1,0 +1,82 @@
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <clocale>
+
+using namespace std;
+
+int main() {
+   
+    setlocale(LC_ALL, "Russian");
+    
+    int N, m;                       // число вершин и рёбер
+    vector<vector<int>> Gr;         // список смежности
+    int u, v;                       // вспомогательные переменные
+
+   
+    ifstream fin("Task8_1.txt");
+    if (!fin) {
+        cout << "не удалось открыть файл Task8_1.txt\n";
+        return 1;
+    }
+    fin >> N >> m;                  // считываем количество вершин и рёбер
+    Gr.resize(N);                   // выделяем память под N списков
+
+    // заполняем списки смежности
+    for (int i = 0; i < m; i++) {
+        fin >> u >> v;
+        // добавляем ребро в обе стороны (неориентированный граф)
+        Gr[u].push_back(v);   //каждое ребро – это две вершины u и v.
+        Gr[v].push_back(u);
+    }
+    fin.close();
+
+    // выводим список смежности для наглядности
+    cout << "\nсписок смежности графа:\n";
+    for (int i = 0; i < N; i++) {
+        cout << i << ": ";
+        for (int neighbor : Gr[i]) {
+            cout << neighbor << " ";
+        }
+        cout << endl;
+    }
+
+    // запрашиваем вершину, для которой ищем несмежные
+    cout << "\nвведите номер вершины (от 0 до " << N - 1 << "): ";
+    cin >> v;
+    if (v < 0 || v >= N) {
+        cout << "\nневерный номер!\n";
+        return 0;
+    }
+
+    // массив флагов: true если вершина смежна с v (или это сама v)
+    vector<bool> adjacent(N, false);
+    adjacent[v] = true;             // саму вершину исключаем из результата
+
+    // отмечаем всех прямых соседей v
+    for (int neighbor : Gr[v]) {
+        adjacent[neighbor] = true;
+    }
+
+    // собираем вершины, не помеченные как смежные
+    vector<int> nonAdjacent;
+    for (int i = 0; i < N; i++) {
+        if (!adjacent[i]) {
+            nonAdjacent.push_back(i);
+        }
+    }
+
+    // выводим результат
+    cout << "вершины, не смежные с " << v << ": ";
+    if (nonAdjacent.empty()) {
+        cout << "нет (все остальные вершины смежны)\n";
+    }
+    else {
+        for (int node : nonAdjacent) {
+            cout << node << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
