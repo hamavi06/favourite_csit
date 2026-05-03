@@ -1,0 +1,99 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+\usepackage{indentfirst}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{verse}
+
+\geometry{left=2.5cm,right=2.5cm,top=2cm,bottom=2cm}
+
+% Настройка заголовка секции
+\titleformat{\section}
+  {\centering\large\bfseries}
+  {}{0em}{}
+
+% Отключить нумерацию секций
+\setcounter{secnumdepth}{0}
+
+% Настройка абзацев
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+\singlespacing   
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Избранные произведения}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{center}
+{\large\bfseries ДАНИИЛ ХАРМС}
+\end{center}
+
+\vspace{1cm}
+
+\input{story1}
+
+\vspace{0.5cm}
+\begin{center}
+* * *
+\end{center}
+
+\section{СКАЗКА}
+\input{story2}
+
+\vspace{0.5cm}
+\begin{center}
+* * *
+\end{center}
+
+\section{СЕВЕРНАЯ СКАЗКА}
+\input{story3}
+
+\vspace{0.5cm}
+\begin{center}
+* * *
+\end{center}
+\vspace{1em}
+\input{story4}
+
+\vspace{0.5cm}
+\begin{center}
+* * *
+\end{center}
+\vspace{1em}
+\input{story5}
+\begin{center}
+* * *
+\end{center}
+
+\section{КИРПИЧ}
+\input{story6}
+
+\vspace{0.5cm}
+\begin{center}
+* * *
+\end{center}
+
+\section{ПЬЕСА}
+\input{story7}
+
+\vspace{0.5cm}
+\begin{center}
+* * *
+\end{center}
+
+\section{ПРОИСШЕСТВИЕ НА УЛИЦЕ}
+\input{story8}
+
+\vspace{0.5cm}
+
+\end{document}
+
+
