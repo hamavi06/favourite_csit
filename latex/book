@@ -1,0 +1,79 @@
+\documentclass[a4paper,12pt,openany]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+\usepackage{indentfirst}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{amsmath}
+
+\geometry{left=2.5cm,right=2.5cm,top=2cm,bottom=2cm}
+
+% Настройка заголовка главы
+\titleformat{\chapter}
+  {\centering\large\bfseries}
+  {}{0em}{}
+\titlespacing*{\chapter}{0pt}{-30pt}{20pt}
+
+% Отключить нумерацию глав
+\setcounter{secnumdepth}{0}
+
+% Настройка абзацев
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+\singlespacing
+
+% Нумерация страниц внизу по центру
+\pagestyle{plain}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Избранные произведения}
+\end{center}
+\vspace{0.5cm}
+\begin{center}
+{\large\bfseries ДАНИИЛ ХАРМС}
+\end{center}
+\vspace{1cm}
+
+\chapter{}
+\input{story1}
+\vspace{0.5cm}
+\begin{center} * * * \end{center}
+
+\chapter{СКАЗКА}
+\input{story2}
+\vspace{0.5cm}
+\begin{center} * * * \end{center}
+
+\chapter{СЕВЕРНАЯ СКАЗКА}
+\input{story3}
+\vspace{0.5cm}
+\begin{center} * * * \end{center}
+
+\chapter{}
+\input{story4}
+\vspace{0.5cm}
+\begin{center} * * * \end{center}
+
+\chapter{}
+\input{story5}
+\vspace{0.5cm}
+\begin{center} * * * \end{center}
+
+\chapter{КИРПИЧ}
+\input{story6}
+\vspace{0.5cm}
+\begin{center} * * * \end{center}
+
+\chapter{ПЬЕСА}
+\input{story7}
+\vspace{0.5cm}
+\begin{center} * * * \end{center}
+
+\chapter{ПРОИСШЕСТВИЕ НА УЛИЦЕ}
+\input{story8}
+
+\end{document}
