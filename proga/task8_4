@@ -1,0 +1,82 @@
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <clocale>
+
+using namespace std;
+
+// рекурсивная функция обхода в глубину (dfs)
+void dfs(int v, const vector<vector<int>>& Gr, vector<bool>& used) {
+    used[v] = true;          // помечаем текущую вершину как посещённую
+    // перебираем всех соседей вершины v
+    for (int neighbor : Gr[v]) {
+        if (!used[neighbor]) {   // если сосед ещё не посещён
+            dfs(neighbor, Gr, used);   // рекурсивно обходим его
+        }
+    }
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");  
+
+    int N, m;                         // количество вершин и рёбер
+    vector<vector<int>> Gr;           // список смежности
+    int u, v;                         // для чтения рёбер
+
+    // читаем граф из файла
+    ifstream fin("Task8_4.txt");
+    if (!fin) {
+        cout << "не удалось открыть файл Task8_1.txt\n";
+        return 1;
+    }
+    fin >> N >> m;                    // считываем N и m
+    Gr.resize(N);                     // выделяем память под N списков
+
+    // заполняем список смежности (неориентированный граф)
+    for (int i = 0; i < m; i++) {
+        fin >> u >> v;
+        Gr[u].push_back(v);
+        Gr[v].push_back(u);
+    }
+    fin.close();
+
+    // выводим список смежности для наглядности
+    cout << "\nсписок смежности графа:\n";
+    for (int i = 0; i < N; i++) {
+        cout << i << ": ";
+        for (int neighbor : Gr[i]) {
+            cout << neighbor << " ";
+        }
+        cout << endl;
+    }
+
+    // массив посещённых вершин (изначально все false)
+    vector<bool> used(N, false);
+
+    // запускаем обход в глубину из вершины 0
+    if (N > 0) {
+        dfs(0, Gr, used);
+    }
+
+    // проверяем, все ли вершины были посещены
+    bool connected = true;
+    for (int i = 0; i < N; i++) {
+        if (!used[i]) {
+            connected = false;
+            break;
+        }
+    }
+
+  
+   
+    if (connected) {
+        cout << "граф является связным \n";
+    }
+    else {
+        cout << "граф не является связным\n";
+        
+    }
+
+    return 0;
+}
+
