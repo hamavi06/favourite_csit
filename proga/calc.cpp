@@ -10,6 +10,71 @@ int divide(int a, int b) {
 }
 
 int factorial(int n) {
+    if (n < 0) {
+        cout << "Error: Factorial of negative number is undefined!" << endl;
+        return -1;
+    }
+    int result = 1;
+    for (int i = 1; i <= n; i++) {
+        result = result * i;
+    }
+    return result;
+}
+
+int findMax(int arr[], int size) {
+    if (size <= 0) {
+        cout << "Error: Array is empty!" << endl;
+        return -1;
+    }
+    int max = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
+int main() {
+    int a, b;
+    cout << "Enter two numbers for division: ";
+    cin >> a >> b;
+    cout << a << " / " << b << " = " << divide(a, b) << endl;
+    
+    int n;
+    cout << "Enter a number for factorial: ";
+    cin >> n;
+    cout << "Factorial of " << n << " = " << factorial(n) << endl;
+    
+    int size;
+    cout << "Enter array size: ";
+    cin >> size;
+    
+    if (size > 0) {
+        int arr[size];
+        cout << "Enter " << size << " numbers: ";
+        for (int i = 0; i < size; i++) {
+            cin >> arr[i];
+        }
+        cout << "Max value = " << findMax(arr, size) << endl;
+    } else {
+        int arr[1];
+        cout << "Max of empty array = " << findMax(arr, 0) << endl;
+    }
+    
+    return 0;
+}#include <iostream>
+using namespace std;
+
+int divide(int a, int b) {
+    if (b == 0) {
+        cout << "Error: Cannot divide by zero!" << endl;
+        return 0;
+    }
+    return a / b;
+}
+
+int factorial(int n) {
     int result = 1;
     for (int i = 1; i <= n; i++) {
         result = result * i;
